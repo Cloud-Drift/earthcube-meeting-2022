@@ -1,7 +1,15 @@
+# dataset files and folders
+data/raw/drifter_*.nc
+data/gdp_*.nc
+data/gdp_*.parquet
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# macos
+*.DS_Store
 
 # C extensions
 *.so

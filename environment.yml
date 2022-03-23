@@ -1,0 +1,17 @@
+name: earthcube
+channels:
+  - conda-forge
+dependencies:
+  - cartopy
+  - dask
+  - dask-labextension
+  - erddapy
+  - jupyterlab
+  - matplotlib
+  - numpy
+  - netCDF4
+  - pandas
+  - xarray
+  - pyarrow
+  - awkward
+  - numba
