@@ -2,7 +2,7 @@
 
 ## Accelerating Lagrangian analyses of oceanic data: benchmarking typical workflows
 
-[Philippe Miron](https://github.com/philippemiron)<sup>1</sup>, [Shane Elipot](https://github.com/selipot)<sup>2</sup>, Rick Lumpkin<sup>3</sup>, Bertrand Dano<sup>2</sup>
+[Philippe Miron](https://github.com/philippemiron)<sup>1</sup>, [Shane Elipot](https://github.com/selipot)<sup>2</sup>, [Rick Lumpkin](https://github.com/RickLumpkin)<sup>3</sup>, Bertrand Dano<sup>2</sup>
 
 - <sup>1</sup> Florida State University, USA
 - <sup>2</sup> University of Miami, USA
