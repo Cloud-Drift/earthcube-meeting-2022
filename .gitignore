@@ -3,6 +3,9 @@ data/raw/drifter_*.nc
 data/gdp_*.nc
 data/gdp_*.parquet
 
+# dask folder
+dask-worker-space/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
