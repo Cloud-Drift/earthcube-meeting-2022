@@ -2,6 +2,7 @@ import xarray as xr
 import numpy as np
 from datetime import datetime
 import pandas as pd
+import awkward as ak
 
 
 def decode_date(t):
@@ -99,7 +100,6 @@ class create_ragged_array:
         '''
         Reserve the space for the total size of the array
         '''
-        print('test')
         # metadata
         self.id = np.zeros(nb_traj, dtype='int64')
         self.location_type = np.zeros(nb_traj, dtype='bool') # 0 Argos, 1 GPS
@@ -333,3 +333,172 @@ class create_ragged_array:
         ds.time.encoding['units'] = 'seconds since 1970-01-01 00:00:00'
 
         return ds
+
+
+def create_ak(ds: xr.Dataset) -> ak.Array:
+    # pointer to the start of each trajectory
+    offset = ak.layout.Index32(np.insert(np.cumsum(ds.rowsize), 0, 0))
+    longitude = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.longitude), parameters={"attrs": ds.longitude.attrs})
+    latitude = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.latitude), parameters={"attrs": ds.latitude.attrs})
+    time = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.time.values), parameters={"attrs": ds.time.attrs})
+    ids = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.ids), parameters={"attrs": ds.ids.attrs})
+    ve = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.ve), parameters={"attrs": ds.ve.attrs})
+    vn = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.vn), parameters={"attrs": ds.vn.attrs})
+    gap = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.gap), parameters={"attrs": ds.gap.attrs})
+    err_lat = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.err_lat), parameters={"attrs": ds.err_lat.attrs})
+    err_lon = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.err_lon), parameters={"attrs": ds.err_lon.attrs})
+    err_ve = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.err_ve), parameters={"attrs": ds.err_ve.attrs})
+    err_vn = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.err_vn), parameters={"attrs": ds.err_vn.attrs})
+    drogue_status = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.drogue_status), parameters={"attrs": ds.drogue_status.attrs})
+    sst = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.sst), parameters={"attrs": ds.sst.attrs})
+    sst1 = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.sst1), parameters={"attrs": ds.sst1.attrs})
+    sst2 = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.sst2), parameters={"attrs": ds.sst2.attrs})
+    err_sst = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.err_sst), parameters={"attrs": ds.err_sst.attrs})
+    err_sst1 = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.err_sst1), parameters={"attrs": ds.err_sst1.attrs})
+    err_sst2 = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.err_sst2), parameters={"attrs": ds.err_sst2.attrs})
+    flg_sst = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.flg_sst), parameters={"attrs": ds.flg_sst.attrs})
+    flg_sst1 = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.flg_sst1), parameters={"attrs": ds.flg_sst1.attrs})
+    flg_sst2 = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.flg_sst2), parameters={"attrs": ds.flg_sst2.attrs})
+
+    obs = ak.Array(
+        ak.layout.RecordArray(
+            [
+                longitude,
+                latitude,
+                time,
+                ids,
+                ve,
+                vn,
+                gap,
+                err_lat,
+                err_lon,
+                err_ve,
+                err_vn,
+                drogue_status,
+                sst,
+                sst1,
+                sst2,
+                err_sst,
+                err_sst1,
+                err_sst2,
+                flg_sst,
+                flg_sst1,
+                flg_sst2,
+            ],
+            [
+                "longitude",
+                "latitude",
+                "time",
+                "ids",
+                "ve",
+                "vn",
+                "gap",
+                "err_lat",
+                "err_lon",
+                "err_ve",
+                "err_vn",
+                "drogue_status",
+                "sst",
+                "sst1",
+                "sst2",
+                "err_sst",
+                "err_sst1",
+                "err_sst2",
+                "flg_sst",
+                "flg_sst1",
+                "flg_sst2",
+            ],
+        )
+    )
+
+    # some work needed to convert the string varibables
+    # ValueError: NumPy format "15s" cannot be expressed as a PrimitiveType
+    array = ak.Array(
+        ak.layout.RecordArray(
+            [
+                ak.layout.NumpyArray(ds.ID, parameters={"attrs": ds.ID.attrs}),
+                ak.layout.NumpyArray(ds.rowsize, parameters={"attrs": ds.rowsize.attrs}),
+                ak.layout.NumpyArray(ds.location_type, parameters={"attrs": ds.location_type.attrs}),
+                ak.layout.NumpyArray(ds.WMO, parameters={"attrs": ds.WMO.attrs}),                
+                ak.layout.NumpyArray(ds.expno, parameters={"attrs": ds.expno.attrs}),               
+                ak.layout.NumpyArray(ds.deploy_date.values, parameters={"attrs": ds.deploy_date.attrs}),
+                ak.layout.NumpyArray(ds.deploy_lat, parameters={"attrs": ds.deploy_lat.attrs}),
+                ak.layout.NumpyArray(ds.deploy_lon, parameters={"attrs": ds.deploy_lon.attrs}),
+                ak.layout.NumpyArray(ds.end_date.values, parameters={"attrs": ds.end_date.attrs}),
+                ak.layout.NumpyArray(ds.end_lat, parameters={"attrs": ds.end_lat.attrs}),
+                ak.layout.NumpyArray(ds.end_lon, parameters={"attrs": ds.end_lon.attrs}),
+                ak.layout.NumpyArray(ds.drogue_lost_date.values, parameters={"attrs": ds.drogue_lost_date.attrs}),
+                ak.layout.NumpyArray(ds.type_death, parameters={"attrs": ds.type_death.attrs}),
+                #ak.layout.NumpyArray(ds.type_buoy),
+                #ak.layout.NumpyArray(ds.DeploymentShip),
+                #ak.layout.NumpyArray(ds.DeploymentStatus),
+                #ak.layout.NumpyArray(ds.BuoyTypeManufacturer),
+                #ak.layout.NumpyArray(ds.BuoyTypeSensorArray),
+                ak.layout.NumpyArray(ds.CurrentProgram, parameters={"attrs": ds.CurrentProgram.attrs}),
+                #ak.layout.NumpyArray(ds.PurchaserFunding),
+                #ak.layout.NumpyArray(ds.SensorUpgrade),
+                #ak.layout.NumpyArray(ds.Transmissions),
+                #ak.layout.NumpyArray(ds.DeployingCountry),
+                #ak.layout.NumpyArray(ds.DeploymentComments),
+                ak.layout.NumpyArray(ds.ManufactureYear, parameters={"attrs": ds.ManufactureYear.attrs}),
+                ak.layout.NumpyArray(ds.ManufactureMonth, parameters={"attrs": ds.ManufactureMonth.attrs}),
+                #ak.layout.NumpyArray(ds.ManufactureSensorType),
+                ak.layout.NumpyArray(ds.ManufactureVoltage, parameters={"attrs": ds.ManufactureVoltage.attrs}),
+                ak.layout.NumpyArray(ds.FloatDiameter, parameters={"attrs": ds.FloatDiameter.attrs}),
+                ak.layout.NumpyArray(ds.SubsfcFloatPresence, parameters={"attrs": ds.SubsfcFloatPresence.attrs}),
+                #ak.layout.NumpyArray(ds.DrogueType),
+                ak.layout.NumpyArray(ds.DrogueLength, parameters={"attrs": ds.DrogueLength.attrs}),
+                ak.layout.NumpyArray(ds.DrogueBallast, parameters={"attrs": ds.DrogueBallast.attrs}),
+                ak.layout.NumpyArray(ds.DragAreaAboveDrogue, parameters={"attrs": ds.DragAreaAboveDrogue.attrs}),
+                ak.layout.NumpyArray(ds.DragAreaOfDrogue, parameters={"attrs": ds.DragAreaOfDrogue.attrs}),
+                ak.layout.NumpyArray(ds.DragAreaRatio, parameters={"attrs": ds.DragAreaRatio.attrs}),
+                ak.layout.NumpyArray(ds.DrogueCenterDepth, parameters={"attrs": ds.DrogueCenterDepth.attrs}),
+                #ak.layout.NumpyArray(ds.DrogueDetectSensor),
+                obs.layout,
+            ],
+            [
+                "ID",
+                "rowsize",
+                "location_type",
+                "WMO",
+                "expno",
+                "deploy_date",
+                "deploy_lat",
+                "deploy_lon",
+                "end_date",
+                "end_lat",
+                "end_lon",
+                "drogue_lost_date",
+                "type_death",
+                #"type_buoy",
+                #"DeploymentShip",
+                #"DeploymentStatus",
+                #"BuoyTypeManufacturer",
+                #"BuoyTypeSensorArray",
+                "CurrentProgram",
+                #"PurchaserFunding",
+                #"SensorUpgrade",
+                #"Transmissions",
+                #"DeployingCountry",
+                #"DeploymentComments",
+                "ManufactureYear",
+                "ManufactureMonth",
+                #"ManufactureSensorType",
+                "ManufactureVoltage",
+                "FloatDiameter",
+                "SubsfcFloatPresence",
+                #"DrogueType",
+                "DrogueLength",
+                "DrogueBallast",
+                "DragAreaAboveDrogue",
+                "DragAreaOfDrogue",
+                "DragAreaRatio",
+                "DrogueCenterDepth",
+                #"DrogueDetectSensor",
+                "obs",
+            ],
+            parameters={"attrs": ds.attrs}  # global attributes
+        )
+    )
+
+    return array
