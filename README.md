@@ -1,8 +1,10 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Cloud-Drift/earthcube-meeting-2022/main?labpath=PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb)
+
 # 2022 EarthCube Annual meeting
 
 ## Accelerating Lagrangian analyses of oceanic data: benchmarking typical workflows
 
-[Philippe Miron](https://github.com/philippemiron)<sup>1</sup>, [Shane Elipot](https://github.com/selipot)<sup>2</sup>, [Rick Lumpkin](https://github.com/RickLumpkin)<sup>3</sup>, Bertrand Dano<sup>2</sup>
+[Philippe Miron](https://github.com/philippemiron)<sup>1</sup>, [Shane Elipot](https://github.com/selipot)<sup>2</sup>, [Rick Lumpkin](https://github.com/RickLumpkin)<sup>3</sup>, [Bertrand Dano](https://github.com/bdano63)<sup>2</sup>
 
 - <sup>1</sup> Florida State University, USA
 - <sup>2</sup> University of Miami, USA
