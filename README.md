@@ -1,3 +1,5 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Cloud-Drift/earthcube-meeting-2022/main?labpath=PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb)
+
 # 2022 EarthCube Annual meeting
 
 ## Accelerating Lagrangian analyses of oceanic data: benchmarking typical workflows
