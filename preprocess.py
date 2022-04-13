@@ -83,7 +83,7 @@ class create_ragged_array:
         self.index_traj = np.insert(np.cumsum(self.rowsize), 0, 0)
 
         for i, file in enumerate(self.files):
-            print(f'{i+1}/{self.nb_traj}', end='\r')
+            print(f'{i+1}/{self.nb_traj} files processed', end='\r')
             self.fill_ragged_array(file, i, self.index_traj[i])
 
     def number_of_observations(self, files) -> np.array:
