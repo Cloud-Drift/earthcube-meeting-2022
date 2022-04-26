@@ -18,3 +18,26 @@ This [notebook](https://github.com/Cloud-Drift/earthcube-meeting-2022/blob/main/
 3. analyses per trajectory (e.g. single statistics, Fast Fourier Transforms).
 
 Because the CloudDrift project aims at accelerating the use of Lagrangian data for atmospheric, oceanic, and climate sciences, we hope that this notebook will incite the community of users to eventually test it on their own platform and thus provide us with feedback on its ease of use and the intuitiveness of the proposed methods and guide future developments.
+
+
+### Directions To Run Notebook On Your Own Computer
+
+In terminal window, install everything and start jupyter:
+
+```
+git clone https://github.com/Cloud-Drift/earthcube-meeting-2022
+cd earthcube-meeting-2022
+conda env create --name earthcube -f environment.yml
+conda activate earthcube
+jupyter notebook
+```
+
+The last command should open the juptyter notebook interface in your web-browser. Once that's done, click on the notebook name (shown below) and then run all cells.
+
+`PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb`
+
+
+
+
+
+
