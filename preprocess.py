@@ -240,7 +240,7 @@ class create_ragged_array:
     def to_xarray(self):
         ds = xr.Dataset(
             data_vars=dict(
-                rowsize=(['traj'], self.rowsize, {'long_name': 'Number of observations per trajectory', 'units':'-'}),
+                rowsize=(['traj'], self.rowsize, {'long_name': 'Number of observations per trajectory', 'sample_dimension': 'obs', 'units':'-'}),
                 location_type=(['traj'], self.location_type, {'long_name': 'Satellite-based location system', 'units':'-', 'comments':'0 (Argos), 1 (GPS)'}),
                 WMO=(['traj'], self.wmo, {'long_name': 'World Meteorological Organization buoy identification number', 'units':'-'}),
                 expno=(['traj'], self.expno, {'long_name': 'Experiment number', 'units':'-'}),
