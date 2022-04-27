@@ -22,17 +22,17 @@ Because the CloudDrift project aims at accelerating the use of Lagrangian data f
 
 ### Directions To Run Notebook On Your Own Computer
 
-In terminal window, install everything and start jupyter:
+In terminal window, install everything using [conda](https://docs.conda.io/en/latest/), and start jupyter lab:
 
 ```
 git clone https://github.com/Cloud-Drift/earthcube-meeting-2022
 cd earthcube-meeting-2022
 conda env create --name earthcube -f environment.yml
 conda activate earthcube
-jupyter notebook
+jupyter lab
 ```
 
-The last command should open the juptyter notebook interface in your web-browser. Once that's done, click on the notebook name (shown below) and then run all cells.
+The last command should open the jupyter lab interface in your web browser. Once that's done, click on the notebook name (shown below) and then run all cells.
 
 `PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb`
 
