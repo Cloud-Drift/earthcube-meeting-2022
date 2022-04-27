@@ -20,21 +20,20 @@ This [notebook](https://github.com/Cloud-Drift/earthcube-meeting-2022/blob/main/
 Because the CloudDrift project aims at accelerating the use of Lagrangian data for atmospheric, oceanic, and climate sciences, we hope that this notebook will incite the community of users to eventually test it on their own platform and thus provide us with feedback on its ease of use and the intuitiveness of the proposed methods and guide future developments.
 
 
-### Directions To Run Notebook On Your Own Computer
+### How to run the Notebook on your own computer ?
 
-In terminal window, install everything using [conda](https://docs.conda.io/en/latest/), and start jupyter lab:
+In a terminal window, clone and build the environment using [conda](https://docs.conda.io/en/latest/), then launch jupyter lab:
 
 ```
 git clone https://github.com/Cloud-Drift/earthcube-meeting-2022
 cd earthcube-meeting-2022
-conda env create --name earthcube -f environment.yml
+conda env create -f environment.yml
 conda activate earthcube
 jupyter lab
 ```
 
-The last command should open the jupyter lab interface in your web browser. Once that's done, click on the notebook name (shown below) and then run all cells.
+The last command should open the jupyter lab interface in your web browser. Once completed, click on the Notebook `PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb`, and start exploring!
 
-`PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb`
 
 
 
