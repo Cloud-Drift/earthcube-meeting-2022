@@ -12,7 +12,7 @@
 
 For data, “Lagrangian” refers to oceanic and atmosphere information acquired by observing platforms drifting with the flow they are embedded within, but also more broadly refers to the data originating from uncrewed platforms, vehicles, and animals that gather data along their unrestricted but complicated paths. Because such paths traverse both spatial and temporal dimensions, Lagrangian data often convolve spatial and temporal information that cannot always and readily be organized, cataloged, and stored in common data structures and file formats with the help of common libraries and standards. As such, for both data generators and data users, Lagrangian data present challenges that the CloudDrift project aims to overcome.
 
-This [notebook](https://github.com/Cloud-Drift/earthcube-meeting-2022/blob/main/PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb), consists of systematic comparisons and evaluations of workflows for Lagrangian data, using as a basis the velocity and sea surface temperature dataset emanating from the drifting buoys of the Global Drifter Program. Specifically, we consider the interplay between diverse storage file formats (NetCDF, Parquet) and the data structure associated with common existing libraries in Python (xarray, pandas, and awkward) in order to test their adequacies for performing three common Lagrangian tasks:
+This [Notebook](https://github.com/Cloud-Drift/earthcube-meeting-2022/blob/main/PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb), consists of systematic comparisons and evaluations of workflows for Lagrangian data, using as a basis the velocity and sea surface temperature dataset emanating from the drifting buoys of the Global Drifter Program. Specifically, we consider the interplay between diverse storage file formats (NetCDF, Parquet) and the data structure associated with common existing libraries in Python (xarray, pandas, and awkward) in order to test their adequacies for performing three common Lagrangian tasks:
 1. binning of a variable on an Eulerian grid (e.g. mean temperature map);
 2. extracting data within given geographical and/or temporal windows;
 3. analyses per trajectory (e.g. single statistics, Fast Fourier Transforms).
@@ -22,7 +22,7 @@ Because the CloudDrift project aims at accelerating the use of Lagrangian data f
 
 ### How to run the Notebook on your own computer ?
 
-In a terminal window, clone and build the environment using [conda](https://docs.conda.io/en/latest/), then launch jupyter lab:
+In a terminal window, clone and build the environment using [Anaconda](https://docs.conda.io/en/latest/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html), then launch jupyter lab:
 
 ```
 git clone https://github.com/Cloud-Drift/earthcube-meeting-2022
@@ -33,10 +33,3 @@ jupyter lab
 ```
 
 The last command should open the jupyter lab interface in your web browser. Once completed, click on the Notebook `PM_05_Accelerating_Lagrangian_analyses_of_oceanic_data_benchmarking_typical_workflows.ipynb`, and start exploring!
-
-
-
-
-
-
-
