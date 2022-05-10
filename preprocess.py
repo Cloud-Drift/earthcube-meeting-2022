@@ -3,6 +3,7 @@ import numpy as np
 from datetime import datetime
 import pandas as pd
 import awkward as ak
+from tqdm import tqdm
 
 
 def decode_date(t):
@@ -82,8 +83,8 @@ class create_ragged_array:
         self.allocate_data(self.nb_traj, self.nb_obs)
         self.index_traj = np.insert(np.cumsum(self.rowsize), 0, 0)
 
-        for i, file in enumerate(self.files):
-            print(f'{i+1}/{self.nb_traj} files processed', end='\r')
+        for i, file in tqdm(enumerate(self.files), total=len(self.files)):
+            #print(f'{i+1}/{self.nb_traj} files processed', end='\r')
             self.fill_ragged_array(file, i, self.index_traj[i])
 
     def number_of_observations(self, files) -> np.array:
