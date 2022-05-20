@@ -141,8 +141,8 @@ class create_ragged_array:
         self.drogue_detect_sensor = np.chararray(nb_traj, itemsize=15)
 
         # values define at every observations (timesteps)
-        self.longitude = np.zeros(nb_obs, dtype='float32')
-        self.latitude = np.zeros(nb_obs, dtype='float32')
+        self.lon = np.zeros(nb_obs, dtype='float32')
+        self.lat = np.zeros(nb_obs, dtype='float32')
         self.time = np.zeros(nb_obs, dtype='datetime64[s]')
         self.ve = np.zeros(nb_obs, dtype='float32')
         self.vn = np.zeros(nb_obs, dtype='float32')
@@ -190,8 +190,8 @@ class create_ragged_array:
         self.type_buoy[tid] = ds.typebuoy.data[0]
 
         # vectors
-        self.longitude[oid:oid+size] = ds.longitude.data[0]
-        self.latitude[oid:oid+size] = ds.latitude.data[0]
+        self.lon[oid:oid+size] = ds.longitude.data[0]
+        self.lat[oid:oid+size] = ds.latitude.data[0]
         self.time[oid:oid+size] = decode_date(ds.time.data[0])
         self.ve[oid:oid+size] = ds.ve.data[0]
         self.vn[oid:oid+size] = ds.vn.data[0]
@@ -303,10 +303,10 @@ class create_ragged_array:
 
             coords=dict(
                 ID=(['traj'], self.id, {'long_name': 'Global Drifter Program Buoy ID', 'units':'-'}),
-                longitude=(['obs'], self.longitude, {'long_name': 'Longitude', 'units':'degrees_east'}),
-                latitude=(['obs'], self.latitude, {'long_name': 'Latitude', 'units':'degrees_north'}),
+                lon=(['obs'], self.lon, {'long_name': 'Longitude', 'units':'degrees_east'}),
+                lat=(['obs'], self.lat, {'long_name': 'Latitude', 'units':'degrees_north'}),
                 time=(['obs'], self.time, {'long_name': 'Time'}),
-                ids=(['obs'], np.repeat(self.id, self.rowsize), {'long_name': "Trajectory index of vars['traj'] for all observations", 'units':'-'}),
+                ids=(['obs'], np.repeat(self.id, self.rowsize), {'long_name': "Global Drifter Program Buoy identification number of observations", 'units':'-'}),
             ),
 
             attrs={
@@ -339,8 +339,8 @@ class create_ragged_array:
 def create_ak(ds: xr.Dataset) -> ak.Array:
     # pointer to the start of each trajectory
     offset = ak.layout.Index32(np.insert(np.cumsum(ds.rowsize), 0, 0))
-    longitude = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.longitude), parameters={'attrs': ds.longitude.attrs})
-    latitude = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.latitude), parameters={'attrs': ds.latitude.attrs})
+    lon = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.lon), parameters={'attrs': ds.lon.attrs})
+    lat = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.lat), parameters={'attrs': ds.lat.attrs})
     time = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.time.values), parameters={'attrs': ds.time.attrs})
     ids = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.ids), parameters={'attrs': ds.ids.attrs})
     ve = ak.layout.ListOffsetArray32(offset, ak.layout.NumpyArray(ds.ve), parameters={'attrs': ds.ve.attrs})
@@ -364,8 +364,8 @@ def create_ak(ds: xr.Dataset) -> ak.Array:
     obs = ak.Array(
         ak.layout.RecordArray(
             [
-                longitude,
-                latitude,
+                lon,
+                lat,
                 time,
                 ids,
                 ve,
@@ -387,8 +387,8 @@ def create_ak(ds: xr.Dataset) -> ak.Array:
                 flg_sst2,
             ],
             [
-                'longitude',
-                'latitude',
+                'lon',
+                'lat',
                 'time',
                 'ids',
                 've',
