@@ -306,7 +306,7 @@ class create_ragged_array:
                 lon=(['obs'], self.lon, {'long_name': 'Longitude', 'units':'degrees_east'}),
                 lat=(['obs'], self.lat, {'long_name': 'Latitude', 'units':'degrees_north'}),
                 time=(['obs'], self.time, {'long_name': 'Time'}),
-                ids=(['obs'], np.repeat(self.id, self.rowsize), {'long_name': "Global Drifter Program Buoy identification number of observations", 'units':'-'}),
+                ids=(['obs'], np.repeat(self.id, self.rowsize), {'long_name': "Global Drifter Program Buoy identification number repeated along observations", 'units':'-'}),
             ),
 
             attrs={
