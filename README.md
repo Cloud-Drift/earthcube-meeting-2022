@@ -19,7 +19,11 @@ This [Notebook](https://github.com/Cloud-Drift/earthcube-meeting-2022/blob/main/
 
 Because the CloudDrift project aims at accelerating the use of Lagrangian data for atmospheric, oceanic, and climate sciences, we hope that this notebook will incite the community of users to eventually test it on their own platform and thus provide us with feedback on its ease of use and the intuitiveness of the proposed methods and guide future developments.
 
-This Notebook is part of a collection of notebooks that form the [2022 EarthCube call for Notebooks](https://github.com/earthcube2022/ec22_book) published with DOI [10.5281/zenodo.6792049](https://doi.org/10.5281/zenodo.6792049). Please cite this notebook as part of collection *EarthCube. (2022). EarthCube 2022 Notebooks (ec2022v6). Zenodo. https://doi.org/10.5281/zenodo.6792049*.
+Please cite this individual notebook as:
+
+Miron, Philippe, Elipot, Shane, Lumpkin, Rick, & Dano, Bertrand. (2022). Accelerating Lagrangian analyses of oceanic data: benchmarking typical workflows (ec2022v4). Zenodo. [https://doi.org/10.5281/zenodo.6781037](https://doi.org/10.5281/zenodo.6781037).
+
+This Notebook is part of a collection of notebooks that form the [2022 EarthCube call for Notebooks](https://github.com/earthcube2022/ec22_book) published with DOI [10.5281/zenodo.6792049](https://doi.org/10.5281/zenodo.6792049). 
 
 ### How to run the Notebook on your own computer ?
 
